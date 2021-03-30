@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import Content from './components/content/Content';
 import Header from './components/header/header';
 
@@ -49,7 +49,12 @@ function App() {
   }
   return (
     <Container>
-      Loading
+      <Row>
+        <Col className="text-center">
+          <h1>Loading</h1>
+        </Col>
+      </Row>
+
     </Container>
   );
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function Header({ location }) {
   return (
-    <header className="d-flex justify-content-between align-items-center mt-4">
+    <header className="d-flex flex-column flex-md-row justify-content-md-between align-items-center mt-4">
       <h1 id="title">
         Weather Display
       </h1>
