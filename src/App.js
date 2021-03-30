@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
+import { Container } from 'react-bootstrap';
 import Content from './components/content/Content';
+import Header from './components/header/header';
 
 function App() {
   const [forecast, saveForecast] = useState([]);
+  const [countryName, saveCountryName] = useState('New York');
   const [coordenates, saveLocation] = useState({ latitude: '28.9445', longitude: '-82.0336' });
   const [rendering, saveRender] = useState(false);
   async function location(e) {
     e.preventDefault();
     const country = e.target.country.value;
+    saveCountryName(country);
     const results = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${country}.json?access_token=${process.env.REACT_APP_MAP_KEY}&limit=1`);
     const response = await results.json();
     saveLocation({
@@ -24,41 +29,28 @@ function App() {
   useEffect(() => {
     forecastRequest()
       .then((value) => {
-        // eslint-disable-next-line no-console
-        console.log(value);
         saveForecast(value);
         saveRender(true);
-      })
-      .catch((value) => {
-        // eslint-disable-next-line no-console
-        console.log(value);
       });
   }, [coordenates]);
 
   if (rendering) {
-  // eslint-disable-next-line no-console
-    const temperature = forecast.daily.map((temp) => console.log(temp));
     return (
-      <div className="App">
-        <header className="App-header">
-          <form onSubmit={location}>
-            <input type="text" name="country" />
-            <input type="submit" />
-          </form>
-          <Content
-            forecast={forecast}
-          />
-          <div>
-            {temperature}
-          </div>
-        </header>
-      </div>
+      <Container>
+        <Header
+          location={location}
+        />
+        <Content
+          countryName={countryName}
+          forecast={forecast}
+        />
+      </Container>
     );
   }
   return (
-    <div>
-      testing
-    </div>
+    <Container>
+      Loading
+    </Container>
   );
 }
 

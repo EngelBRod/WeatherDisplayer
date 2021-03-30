@@ -1,0 +1,59 @@
+$mainColor:#F7910B;
+$secondaryColor:#FFF;
+$lettersColor: #969696;
+
+@font-face{
+  font-family: "Akkurat";
+  src:url('./fonts/Akkurat.ttf');
+  font-style: normal;
+  font-weight: normal;
+}
+html,body{
+  font-family: "Akkurat";
+}
+.MainColor{
+  background-color: $mainColor  !important;
+  color: $secondaryColor;
+}
+//Header
+#title{
+  color:$secondaryColor;
+}
+header{
+  background-color: $mainColor;
+  padding: 10px;
+}
+
+//Current Day
+.country{
+  font-size: 35px;
+  color: $lettersColor;
+}
+.date{
+  font-size: 45px;
+  color: $lettersColor;
+}
+.currentDescription{
+  font-size: 25px;
+  font-weight: lighter;
+  color: $lettersColor;
+}
+.temperature{
+  font-size:60px;
+}
+//Five Days Forecast
+.dayTitle{
+  font-weight: bold;
+  font-size: 25px;
+}
+.weatherIcon{
+  width: 100px;
+}
+.dayTemp{
+  font-size: 30px;
+}
+.dayForecast{
+  font-weight: bold;
+  font-size: 20px;
+  font-style: italic;
+}

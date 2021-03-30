@@ -1,48 +1,54 @@
 import React from 'react';
+import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-function Current({ current }) {
-  // Assigning current day values to variables
+function Current({ current, countryName }) {
+  // Assigning current day values to variables and converting unix timestamp to readable date format
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const date = new Date(current.current.dt * 1000);
-  const day = days[date.getDay()];
-  const today = `${months[date.getMonth()]}/${date.getFullYear()}`;
+  const day = `${days[date.getDay()]} ${date.getDate()}`;
+  const today = `${months[date.getMonth()]} ${date.getFullYear()}`;
+  const { temp } = current.current;
+  const { description } = current.current.weather[0];
   return (
-    <div>
-      {
-         // eslint-disable-next-line no-console
-      console.log(days[date.getDay()])
-      }
-      <div>
-        Date:
-        {day}
-      </div>
-      <div>
-        {today}
-      </div>
-      <div>
-        Temp:
-        {current.current.temp}
-      </div>
-      <div>
-        Forecast:
-        {current.current.weather[0].main}
-      </div>
-      <div>
-        {current.current.weather[0].description}
-      </div>
-      <img src={`http://openweathermap.org/img/wn/${current.current.weather[0].icon}@2x.png`} alt="weather" />
-    </div>
+    <Row className="py-4">
+      <Col>
+        <div className="d-flex flex-column flex-md-row  justify-content-center justify-content-md-between py-2">
+          <div>
+            <h2 className="country">
+              { countryName }
+            </h2>
+            <h3 className="date">
+              { `${day}, ${today}` }
+            </h3>
+          </div>
+          <div className="d-flex justify-content-center align-items-center">
+            <div>
+              <img src={`http://openweathermap.org/img/wn/${current.current.weather[0].icon}@2x.png`} alt="weather" />
+            </div>
+
+            <div className="temperature">
+              {`${Math.round(temp)} F`}
+            </div>
+          </div>
+        </div>
+        <div className="text-center currentDescription">
+          {` "Today's weather forecast is ${description}"`}
+        </div>
+      </Col>
+    </Row>
   );
 }
 export default Current;
 
 Current.defaultProps = {
+  countryName: '',
   current: {},
 };
 
 Current.propTypes = {
+  countryName: PropTypes.string,
   current: PropTypes.shape({
     current: PropTypes.shape({
       clouds: PropTypes.number,

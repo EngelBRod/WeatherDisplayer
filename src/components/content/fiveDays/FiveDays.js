@@ -1,4 +1,5 @@
 import React from 'react';
+import { Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import WeekDay from './weekDay/WeekDay';
 
@@ -15,12 +16,10 @@ function FiveDays({ fiveDays }) {
       description={item.weather[0].description}
     />
   ));
-  // eslint-disable-next-line no-console
-  console.log(weekDay);
   return (
-    <div>
+    <Row className="d-flex justify-content-center py-4">
       {weekDay}
-    </div>
+    </Row>
   );
 }
 export default FiveDays;
